@@ -49,6 +49,7 @@
             box-sizing: border-box;
             width: 100%;
             max-height: 50vh;
+            overflow: hidden;
         }
 
         .birthday-text div {
@@ -77,6 +78,7 @@
             background: linear-gradient(45deg, #ffd700, #c0c0c0, #b8860b, #8b0000, #ffd700);
             background-size: 400%;
             -webkit-background-clip: text;
+            background-clip: text; /* Propriété standard ajoutée */
             -webkit-text-fill-color: transparent;
             animation: textSparkle 8s linear infinite;
         }
@@ -87,7 +89,7 @@
             100% { background-position: 0% 50%; }
         }
 
-        /* Délai pour chaque lettre */
+        /* Délai pour chaque lettre (19 caractères pour "Joyeux Anniversaire Aurore !") */
         .birthday-text span:nth-child(1) { animation-delay: 0.1s; }
         .birthday-text span:nth-child(2) { animation-delay: 0.15s; }
         .birthday-text span:nth-child(3) { animation-delay: 0.2s; }
@@ -147,17 +149,18 @@
 
         /* Style pour les noms en bas */
         .names {
-            position: absolute;
-            bottom: 1vmin;
+            position: fixed;
+            bottom: 2vmin;
             width: 100%;
             text-align: center;
             color: #fff;
             font-size: clamp(0.8rem, 3vw, 1rem);
             text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
-            z-index: 10;
+            z-index: 15;
             padding: 0 1rem;
             box-sizing: border-box;
             line-height: 1.2;
+            overflow: visible;
         }
 
         /* Media queries pour petits écrans */
@@ -168,7 +171,7 @@
             }
             .names {
                 font-size: clamp(0.7rem, 2.5vw, 0.9rem);
-                bottom: 0.5vmin;
+                bottom: 1vmin;
             }
         }
     </style>
