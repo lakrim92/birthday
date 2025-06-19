@@ -1,14 +1,18 @@
 <!DOCTYPE html>
-<!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link rel="icon" type="image/png" href="assets/images/favicon.png" sizes="32x32">
+    <link rel="apple-touch-icon" href="assets/images/apple-touch-icon.png" sizes="180x180">
     <title>Message pour Aurore</title>
     <style>
-        body {
+        html, body {
             margin: 0;
-            min-height: 100vh;
+            padding: 0;
+            height: 100vh;
+            width: 100vw;
+            overflow: hidden;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -17,21 +21,25 @@
             font-family: 'Arial', sans-serif;
             color: #333;
             text-align: center;
-            padding: 1rem;
+            position: fixed;
+            top: 0;
+            left: 0;
             box-sizing: border-box;
         }
 
         .message {
-            font-size: clamp(1.2rem, 5vw, 1.8rem);
+            font-size: clamp(1rem, 4.5vw, 1.5rem);
             max-width: 90%;
-            margin-bottom: 2rem;
+            margin-bottom: 1.5rem;
             text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
             line-height: 1.4;
+            padding: 0 0.5rem;
+            white-space: pre-wrap; /* Preserve line breaks and spaces */
         }
 
         .button {
-            padding: 0.8rem 1.5rem;
-            font-size: clamp(1rem, 4vw, 1.2rem);
+            padding: 0.6rem 1.2rem;
+            font-size: clamp(0.9rem, 3.5vw, 1rem);
             color: #fff;
             background: linear-gradient(45deg, #b8860b, #8b0000);
             border: none;
@@ -54,19 +62,21 @@
         /* Media queries pour petits écrans */
         @media (max-width: 600px) {
             .message {
-                font-size: clamp(1rem, 4.5vw, 1.5rem);
-                margin-bottom: 1.5rem;
+                font-size: clamp(0.9rem, 4vw, 1.2rem);
+                margin-bottom: 1rem;
             }
             .button {
-                padding: 0.6rem 1.2rem;
-                font-size: clamp(0.9rem, 3.5vw, 1rem);
+                padding: 0.5rem 1rem;
+                font-size: clamp(0.8rem, 3vw, 0.9rem);
             }
         }
     </style>
 </head>
 <body>
     <div class="message">
-        Laure, Georges, Lili et Arthur tenons en ce jour particulier à te donner un message.
+Nous sommes le 19 Juin 2025
+Et en ce jour particulier,
+Laure, Georges, Lili et Arthur tenons à te donner un message.
     </div>
     <a href="birthday.html" class="button">Cliquez-moi</a>
 </body>
