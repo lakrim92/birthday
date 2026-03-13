@@ -5,325 +5,456 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <link rel="icon" type="image/png" href="assets/images/favicon.png" sizes="32x32">
     <link rel="apple-touch-icon" href="assets/images/apple-touch-icon.png" sizes="180x180">
-    <!-- <link rel="stylesheet" href="/styles/styles.css"> Commenté pour éviter conflits -->
-    <title>Joyeux Anniversaire Marine</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Lato:wght@300;400&display=swap" rel="stylesheet">
+    <title>Joyeux Anniversaire Jean</title>
     <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
         html, body {
-            margin: 0;
-            padding: 0;
-            height: 100vh;
-            width: 100vw;
+            height: 100%;
+            width: 100%;
             overflow: hidden;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background: linear-gradient(45deg, #b8860b, #ffd700, #c0c0c0, #8b0000, #b8860b);
-            background-size: 400%;
-            animation: sparkleBackground 10s linear infinite;
-            font-family: Arial, sans-serif;
+            background: #0a0a1a;
+            font-family: 'Lato', sans-serif;
+        }
+
+        /* Fond étoilé animé */
+        #stars-canvas {
             position: fixed;
-            top: 0;
-            left: 0;
+            inset: 0;
+            z-index: 0;
         }
 
-        /* Animation pour le fond scintillant */
-        @keyframes sparkleBackground {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 400% 50%; }
-            100% { background-position: 0% 50%; }
+        /* Halo de lumière central */
+        .glow-bg {
+            position: fixed;
+            inset: 0;
+            z-index: 1;
+            background:
+                radial-gradient(ellipse 70% 50% at 50% 50%, rgba(180, 100, 255, 0.12) 0%, transparent 70%),
+                radial-gradient(ellipse 50% 40% at 30% 70%, rgba(255, 180, 50, 0.08) 0%, transparent 60%),
+                radial-gradient(ellipse 50% 40% at 70% 30%, rgba(255, 80, 120, 0.08) 0%, transparent 60%);
+            animation: glowPulse 6s ease-in-out infinite;
         }
 
-        /* Style pour le texte animé */
-        .birthday-text {
-                color: #fff;
-                font-size: clamp(3rem, 12vw, 10rem);   /* beaucoup plus gros qu'avant */
-                font-weight: 900;
-                text-align: center;
-                position: absolute;
-                top: 50%;
-                left: 50%;
-                transform: translate(-50%, -50%);
-                z-index: 10;
-                width: 100%;
-                padding: 0 2rem;
-                box-sizing: border-box;
-                text-shadow: 4px 4px 12px rgba(0, 0, 0, 0.7);
-                line-height: 1.1;        }
-
-        .birthday-text div {
-            display: flex;
-            justify-content: center;
-            /* line-height: 1.2; */
+        @keyframes glowPulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.6; }
         }
 
-        .birthday-text span {
-            display: inline-block;
-            opacity: 0;
-            transform: translateY(40px);
-            animation: letterAppear 0.7s ease-out forwards;
-        }
-
-        /* Animation pour l'apparition des lettres */
-        @keyframes letterAppear {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* Animation pour le changement de couleur en transition */
-        .color-transition {
-            background: linear-gradient(45deg, #ffd700, #c0c0c0, #b8860b, #8b0000, #ffd700);
-            background-size: 400%;
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-            animation: textSparkle 8s linear infinite;
-        }
-
-        @keyframes textSparkle {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 400% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-
-        /* Délai pour chaque lettre (19 caractères pour "Joyeux Anniversaire Aurore !") */
-        .birthday-text span:nth-child(1) { animation-delay: 0.1s; }
-        .birthday-text span:nth-child(2) { animation-delay: 0.15s; }
-        .birthday-text span:nth-child(3) { animation-delay: 0.2s; }
-        .birthday-text span:nth-child(4) { animation-delay: 0.25s; }
-        .birthday-text span:nth-child(5) { animation-delay: 0.3s; }
-        .birthday-text span:nth-child(6) { animation-delay: 0.35s; }
-        .birthday-text span:nth-child(7) { animation-delay: 0.4s; }
-        .birthday-text span:nth-child(8) { animation-delay: 0.45s; }
-        .birthday-text span:nth-child(9) { animation-delay: 0.5s; }
-        .birthday-text span:nth-child(10) { animation-delay: 0.55s; }
-        .birthday-text span:nth-child(11) { animation-delay: 0.6s; }
-        .birthday-text span:nth-child(12) { animation-delay: 0.65s; }
-        .birthday-text span:nth-child(13) { animation-delay: 0.7s; }
-        .birthday-text span:nth-child(14) { animation-delay: 0.75s; }
-        .birthday-text span:nth-child(15) { animation-delay: 0.8s; }
-        .birthday-text span:nth-child(16) { animation-delay: 0.85s; }
-        .birthday-text span:nth-child(17) { animation-delay: 0.9s; }
-        .birthday-text span:nth-child(18) { animation-delay: 0.95s; }
-        .birthday-text span:nth-child(19) { animation-delay: 1.0s; }
-
-        /* Style pour les feux d'artifice */
-        .firework {
-            position: absolute;
+        /* Confetti canvas */
+        #confetti-canvas {
+            position: fixed;
+            inset: 0;
+            z-index: 5;
             pointer-events: none;
         }
 
-        .particle {
-            position: absolute;
-            width: var(--size);
-            height: var(--size);
-            background: radial-gradient(circle, rgba(255,255,255,0.8) 20%, transparent 70%);
-            border-radius: 50%;
-            animation: particleBurst 1.8s ease-out forwards;
-            box-shadow: 0 0 8px var(--color);
-        }
-
-        @keyframes particleBurst {
-            0% {
-                transform: translate(0, 0) scale(1);
-                opacity: 1;
-            }
-            100% {
-                transform: translate(var(--dx), var(--dy)) scale(0);
-                opacity: 0;
-            }
-        }
-
-        /* Canvas pour les cotillons */
-        canvas {
+        /* Contenu principal */
+        .scene {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 5;
+            inset: 0;
+            z-index: 10;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 0 5vw;
+            /* Réserve de l'espace pour la signature en bas */
+            padding-bottom: clamp(4rem, 12vh, 7rem);
+            padding-top: clamp(1rem, 4vh, 3rem);
         }
 
-        /* Style pour les noms en bas */
-        .names {
-            position: fixed;
-            bottom: 2vmin;
-            width: 100%;
+        /* Badge anniversaire */
+        .badge {
+            font-family: 'Lato', sans-serif;
+            font-weight: 300;
+            font-size: clamp(0.55rem, 2vw, 1rem);
+            letter-spacing: clamp(0.2em, 0.5vw, 0.5em);
+            text-transform: uppercase;
+            color: rgba(255, 200, 100, 0.7);
+            opacity: 0;
+            animation: fadeSlideDown 1s ease-out 0.3s forwards;
+            margin-bottom: clamp(0.4em, 1.5vh, 0.8em);
+            white-space: nowrap;
             text-align: center;
-            color: #fff;
-            font-size: clamp(1rem, 3.5vw, 1.2rem);
-            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
-            z-index: 15;
-            padding: 0 1rem;
-            box-sizing: border-box;
-            line-height: 1.2;
+        }
+
+        @keyframes fadeSlideDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Ligne décorative */
+        .divider {
+            width: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255,200,100,0.6), transparent);
+            animation: expandLine 1.2s ease-out 0.8s forwards;
+            margin-bottom: clamp(0.3em, 1vh, 0.6em);
+            max-width: 90vw;
+        }
+
+        @keyframes expandLine {
+            to { width: min(40vw, 500px); }
+        }
+
+        /* Nom principal */
+        .name-wrap {
             overflow: visible;
+            margin-bottom: clamp(0.1em, 0.5vh, 0.2em);
+            max-width: 95vw;
+            text-align: center;
         }
 
-        /* Media queries pour petits écrans */
-        @media (max-width: 600px) {
-            .birthday-text {
-                font-size: clamp(1.2rem, 5vw, 2rem);
-                padding: 0 1rem;
-            }
-            .names {
-                font-size: clamp(0.8rem, 3vw, 1rem);
-                bottom: 1vmin;
-            }
+        .main-name {
+            font-family: 'Playfair Display', serif;
+            font-weight: 900;
+            /*
+              "Jean" est court (4 lettres) : on peut monter à 22vw sans déborder.
+              clamp(min, préféré, max) avec vw comme unité fluide.
+            */
+            font-size: clamp(3.5rem, 22vw, 14rem);
+            line-height: 1;
+            background: linear-gradient(135deg,
+                #f5d26e 0%,
+                #ffffff 30%,
+                #f5a3c7 55%,
+                #ffffff 75%,
+                #f5d26e 100%);
+            background-size: 300% 300%;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: shimmer 5s linear infinite, nameAppear 1s cubic-bezier(.22,1,.36,1) 0.5s both;
+            filter: drop-shadow(0 0 40px rgba(245, 163, 199, 0.4)) drop-shadow(0 0 80px rgba(245, 210, 110, 0.2));
+            letter-spacing: -0.02em;
+            white-space: nowrap;
+            padding-bottom: 0.15em;
         }
 
-        body {
-            animation: fadeIn 2s ease-out;
+        @keyframes shimmer {
+            0%   { background-position: 200% 50%; }
+            100% { background-position: -200% 50%; }
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
+        @keyframes nameAppear {
+            from { opacity: 0; transform: scale(0.85) translateY(30px); }
+            to   { opacity: 1; transform: scale(1) translateY(0); }
         }
 
+        /* Médaillon 70 ans */
+        .age-badge {
+            display: flex;
+            align-items: center;
+            gap: clamp(0.5em, 1.5vw, 1em);
+            opacity: 0;
+            animation: fadeSlideUp 1s ease-out 1s forwards;
+            margin-top: clamp(0.2em, 0.8vh, 0.4em);
+        }
+
+        .age-badge .ornament {
+            flex: 1;
+            height: 1px;
+            max-width: clamp(30px, 8vw, 80px);
+            background: linear-gradient(90deg, transparent, rgba(245, 210, 110, 0.5));
+        }
+        .age-badge .ornament.right {
+            background: linear-gradient(90deg, rgba(245, 210, 110, 0.5), transparent);
+        }
+
+        .age-number {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            font-size: clamp(1.2rem, 4vw, 2.8rem);
+            background: linear-gradient(135deg, #c8922a 0%, #f5d26e 40%, #fff8dc 60%, #f5d26e 80%, #c8922a 100%);
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: shimmer 5s linear infinite;
+            letter-spacing: 0.05em;
+            white-space: nowrap;
+        }
+
+        .age-label {
+            font-family: 'Lato', sans-serif;
+            font-weight: 300;
+            font-size: clamp(0.55rem, 1.5vw, 0.85rem);
+            letter-spacing: 0.35em;
+            text-transform: uppercase;
+            color: rgba(245, 210, 110, 0.65);
+            white-space: nowrap;
+        }
+
+        /* Ligne décorative basse */
+        .divider-bottom {
+            width: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(245,163,199,0.5), transparent);
+            animation: expandLine 1.2s ease-out 1.2s forwards;
+            margin-top: clamp(0.3em, 1vh, 0.5em);
+            margin-bottom: clamp(0.4em, 1.5vh, 0.8em);
+            max-width: 90vw;
+        }
+
+        /* Sous-titre */
+        .subtitle {
+            font-family: 'Lato', sans-serif;
+            font-weight: 300;
+            font-size: clamp(0.5rem, 1.8vw, 1rem);
+            letter-spacing: clamp(0.15em, 0.4vw, 0.4em);
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.55);
+            opacity: 0;
+            animation: fadeSlideUp 1s ease-out 1.5s forwards;
+            text-align: center;
+            white-space: nowrap;
+        }
+
+        @keyframes fadeSlideUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Émojis décoratifs flottants */
+        .floating-emojis {
+            position: fixed;
+            inset: 0;
+            z-index: 6;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .emoji-float {
+            position: absolute;
+            font-size: clamp(1rem, 3vw, 2rem);
+            opacity: 0;
+            animation: floatUp var(--dur) ease-in var(--delay) infinite;
+            left: var(--x);
+            bottom: -10%;
+            filter: drop-shadow(0 0 6px rgba(255,255,255,0.3));
+        }
+
+        @keyframes floatUp {
+            0%   { opacity: 0; transform: translateY(0) rotate(0deg) scale(0.8); }
+            10%  { opacity: 0.9; }
+            80%  { opacity: 0.7; }
+            100% { opacity: 0; transform: translateY(-110vh) rotate(360deg) scale(1.2); }
+        }
+
+        /* Signature en bas */
+        .from {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: clamp(0.6rem, 2vh, 1.2rem) 1rem;
+            text-align: center;
+            z-index: 20;
+            opacity: 0;
+            animation: fadeSlideUp 1s ease-out 2s forwards;
+            background: linear-gradient(to top, rgba(10,10,26,0.7) 0%, transparent 100%);
+        }
+
+        .from-label {
+            font-size: clamp(0.5rem, 1.3vw, 0.75rem);
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.35);
+            display: block;
+            margin-bottom: 0.25em;
+        }
+
+        .from-names {
+            font-family: 'Lato', sans-serif;
+            font-weight: 300;
+            font-size: clamp(0.8rem, 2.2vw, 1.15rem);
+            color: rgba(255, 210, 120, 0.85);
+            letter-spacing: 0.05em;
+        }
+
+        /* Bouton musique */
         #music-toggle {
             position: fixed;
-            bottom: 1rem;
-            right: 1rem;
-            z-index: 20;
-            background: transparent;
-            border: none;
-            font-size: 2rem;
+            bottom: clamp(0.5rem, 2vh, 1.2rem);
+            right: clamp(0.5rem, 2vw, 1.2rem);
+            z-index: 30;
+            background: rgba(255,255,255,0.08);
+            border: 1px solid rgba(255,255,255,0.15);
+            border-radius: 50%;
+            width: clamp(36px, 6vmin, 48px);
+            height: clamp(36px, 6vmin, 48px);
+            font-size: clamp(1rem, 2.5vmin, 1.3rem);
             cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(8px);
+            transition: background 0.3s, transform 0.2s;
+        }
+
+        #music-toggle:hover {
+            background: rgba(255,255,255,0.18);
+            transform: scale(1.1);
+        }
+
+        /* ── Breakpoints ciblés ── */
+
+        /* Très petits écrans (< 360px) */
+        @media (max-width: 360px) {
+            .badge   { letter-spacing: 0.15em; font-size: 0.5rem; }
+            .subtitle { letter-spacing: 0.1em; font-size: 0.5rem; }
+            .main-name { font-size: clamp(2.8rem, 22vw, 5rem); }
+        }
+
+        /* Paysage mobile (hauteur < 500px) */
+        @media (max-height: 500px) {
+            .scene { padding-bottom: clamp(2.5rem, 10vh, 4rem); gap: 0; }
+            .badge { margin-bottom: 0.3em; }
+            .divider-bottom { margin-top: 0.2em; margin-bottom: 0.3em; }
+            .main-name { font-size: clamp(2.5rem, 14vh, 6rem); }
+            .subtitle { display: none; }
+        }
+
+        /* Tablette portrait */
+        @media (min-width: 600px) and (max-width: 1024px) {
+            .main-name { font-size: clamp(6rem, 20vw, 11rem); }
+        }
+
+        /* Grand écran / TV */
+        @media (min-width: 1600px) {
+            .main-name { font-size: clamp(10rem, 15vw, 18rem); }
         }
     </style>
 </head>
 <body>
-    <div class="birthday-text">
-        <div>
-            <span>J</span><span>o</span><span>y</span><span>e</span><span>u</span><span>x</span>
-        </div>
-        <div>
-            <span>A</span><span>n</span><span>n</span><span>i</span><span>v</span><span>e</span><span>r</span><span>s</span><span>a</span><span>i</span><span>r</span><span>e</span>
-        </div>
-        <div>
-            <span>M</span><span>a</span><span>r</span><span>i</span><span>n</span><span>e</span><span> </span><span>!</span>
-        </div>
-    </div>
+
+    <canvas id="stars-canvas"></canvas>
+    <div class="glow-bg"></div>
     <canvas id="confetti-canvas"></canvas>
-    <div class="names">Georges, Laure, Lili et Arthur</div>
+
+    <!-- Émojis flottants -->
+    <div class="floating-emojis" id="floating-emojis"></div>
+
+    <div class="scene">
+        <p class="badge">✦ &nbsp; Joyeux Anniversaire &nbsp; ✦</p>
+        <div class="divider"></div>
+        <div class="name-wrap">
+            <h1 class="main-name">Jean</h1>
+        </div>
+        <div class="age-badge">
+            <span class="ornament"></span>
+            <span class="age-number">70</span>
+            <span class="age-label">ans</span>
+            <span class="ornament right"></span>
+        </div>
+        <div class="divider-bottom"></div>
+        <p class="subtitle">Que cette journée soit inoubliable</p>
+    </div>
+
+    <div class="from">
+        <span class="from-label">avec tout notre amour</span>
+        <span class="from-names">Georges, Laure, Lili &amp; Arthur</span>
+    </div>
 
     <audio id="birthday-music" loop>
         <source src="assets/music/happy-birthday-254480.mp3" type="audio/mpeg">
     </audio>
-    <button id="music-toggle" type="button" onclick="toggleMusic()" aria-label="Activer/Désactiver la musique">
-        🎵
-    </button>
-
-    <script>
-        const music = document.getElementById('birthday-music');
-        let isPlaying = false;
-
-        function toggleMusic() {
-            if (isPlaying) {
-                music.pause();
-            } else {
-                music.play();
-            }
-            isPlaying = !isPlaying;
-        }
-
-        // Lecture automatique de la musique (si autorisée par le navigateur)
-        window.addEventListener('DOMContentLoaded', () => {
-            music.volume = 0.5;
-            music.play().then(() => {
-                isPlaying = true;
-            }).catch(() => {
-                isPlaying = false;
-            });
-        });
-    </script>
+    <button id="music-toggle" onclick="toggleMusic()" aria-label="Musique">🎵</button>
 
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
     <script>
-        // Gestion des cotillons
-        function launchConfetti() {
-            confetti({
-                particleCount: Math.min(100, window.innerWidth / 4),
-                spread: 100,
-                origin: { y: 0.6 },
-                colors: ['#ff0', '#f00', '#00f', '#0f0', '#ff69b4']
-            });
+    /* ── Étoiles ── */
+    (function () {
+        const canvas = document.getElementById('stars-canvas');
+        const ctx = canvas.getContext('2d');
+        let stars = [];
+
+        function resize() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            initStars();
         }
-        setInterval(launchConfetti, 2000);
 
-        // Gestion des feux d'artifice
-        function createFirework(x, y) {
-            const firework = document.createElement('div');
-            firework.className = 'firework';
-            document.body.appendChild(firework);
+        function initStars() {
+            const count = Math.floor((canvas.width * canvas.height) / 3500);
+            stars = Array.from({ length: count }, () => ({
+                x: Math.random() * canvas.width,
+                y: Math.random() * canvas.height,
+                r: Math.random() * 1.5 + 0.3,
+                alpha: Math.random(),
+                dAlpha: (Math.random() * 0.008 + 0.002) * (Math.random() < 0.5 ? 1 : -1),
+            }));
+        }
 
-            // Position définie
-            firework.style.left = x + 'px';
-            firework.style.top = y + 'px';
-
-            // Créer plusieurs particules pour une explosion grandiose
-            const particleCount = Math.min(60, window.innerWidth / 10);
-            const color = `hsl(${Math.random() * 360}, 100%, 50%)`;
-            for (let i = 0; i < particleCount; i++) {
-                const particle = document.createElement('div');
-                particle.className = 'particle';
-                particle.style.setProperty('--color', color);
-
-                // Taille aléatoire pour les particules
-                const size = Math.random() * 8 + 4;
-                particle.style.setProperty('--size', size + 'px');
-
-                // Direction et distance adaptées à la taille de l'écran
-                const angle = Math.random() * Math.PI * 2;
-                const distance = Math.random() * Math.min(150, window.innerWidth / 4) + 50;
-                const dx = Math.cos(angle) * distance;
-                const dy = Math.sin(angle) * distance;
-
-                particle.style.setProperty('--dx', dx + 'px');
-                particle.style.setProperty('--dy', dy + 'px');
-                firework.appendChild(particle);
+        function draw() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            for (const s of stars) {
+                s.alpha += s.dAlpha;
+                if (s.alpha <= 0 || s.alpha >= 1) s.dAlpha *= -1;
+                ctx.beginPath();
+                ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+                ctx.fillStyle = `rgba(255,255,255,${s.alpha.toFixed(2)})`;
+                ctx.fill();
             }
-
-            // Supprimer après l'animation
-            setTimeout(() => firework.remove(), 1800);
+            requestAnimationFrame(draw);
         }
 
-        // Positions pour faire surgir les feux d'artifice de partout
-        function launchMultipleFireworks() {
-            const width = window.innerWidth;
-            const height = window.innerHeight;
+        window.addEventListener('resize', resize);
+        resize();
+        draw();
+    })();
 
-            // Feux d'artifice depuis les bords
-            const positions = [
-                { x: 0, y: Math.random() * height }, // Gauche
-                { x: width, y: Math.random() * height }, // Droite
-                { x: Math.random() * width, y: 0 }, // Haut
-                { x: Math.random() * width, y: height }, // Bas
-                { x: width / 2, y: height / 2 }, // Centre
-                { x: Math.random() * width, y: Math.random() * height },
-            ];
-
-            positions.forEach((pos, index) => {
-                setTimeout(() => createFirework(pos.x, pos.y), index * 80);
-            });
+    /* ── Émojis flottants ── */
+    (function () {
+        const emojis = ['🎂', '🎉', '🎈', '✨', '🌸', '💫', '🥂', '🎁', '💖', '🌟'];
+        const container = document.getElementById('floating-emojis');
+        for (let i = 0; i < 18; i++) {
+            const el = document.createElement('div');
+            el.className = 'emoji-float';
+            el.textContent = emojis[i % emojis.length];
+            el.style.setProperty('--x', (Math.random() * 95 + 1) + '%');
+            el.style.setProperty('--dur', (Math.random() * 10 + 10) + 's');
+            el.style.setProperty('--delay', (Math.random() * 12) + 's');
+            container.appendChild(el);
         }
+    })();
 
-        // Lancer des feux d'artifice toutes les 400ms
-        setInterval(launchMultipleFireworks, 400);
-
-        // Appliquer l'animation de couleur après l'apparition du texte
-        window.addEventListener('DOMContentLoaded', () => {
-            setTimeout(() => {
-                const spans = document.querySelectorAll('.birthday-text span');
-                spans.forEach(span => {
-                    span.classList.add('color-transition');
-                });
-                // Vérification pour débogage
-                console.log('color-transition appliquée à', spans.length, 'éléments');
-            }, 2000);
+    /* ── Confetti ── */
+    function burst() {
+        const colors = ['#f5d26e', '#f5a3c7', '#a78bfa', '#6ee7b7', '#fff'];
+        confetti({
+            particleCount: 60,
+            spread: 80,
+            origin: { x: Math.random(), y: Math.random() * 0.4 + 0.1 },
+            colors,
+            scalar: 1.1,
+            gravity: 0.7,
         });
+    }
+
+    setTimeout(() => burst(), 1000);
+    setTimeout(() => burst(), 2200);
+    setInterval(burst, 4000);
+
+    /* ── Musique ── */
+    const music = document.getElementById('birthday-music');
+    const btn = document.getElementById('music-toggle');
+    let playing = false;
+
+    function toggleMusic() {
+        if (playing) { music.pause(); btn.textContent = '🔇'; }
+        else { music.play();  btn.textContent = '🎵'; }
+        playing = !playing;
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+        music.volume = 0.4;
+        music.play().then(() => { playing = true; }).catch(() => {});
+    });
     </script>
 </body>
 </html>
