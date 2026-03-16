@@ -445,16 +445,29 @@
     const btn = document.getElementById('music-toggle');
     let playing = false;
 
+    function startMusic() {
+        music.volume = 0.4;
+        music.play().then(() => {
+            playing = true;
+            btn.textContent = '🎵';
+        }).catch(() => {});
+    }
+
     function toggleMusic() {
         if (playing) { music.pause(); btn.textContent = '🔇'; }
-        else { music.play();  btn.textContent = '🎵'; }
+        else { music.play(); btn.textContent = '🎵'; }
         playing = !playing;
     }
 
-    window.addEventListener('DOMContentLoaded', () => {
-        music.volume = 0.4;
-        music.play().then(() => { playing = true; }).catch(() => {});
-    });
+    // Tentative d'autoplay au chargement
+    window.addEventListener('DOMContentLoaded', startMusic);
+
+    // Fallback si l'autoplay est bloqué par le navigateur : démarre au premier geste
+    function onFirstInteraction() {
+        if (!playing) startMusic();
+    }
+    document.addEventListener('click',      onFirstInteraction, { once: true });
+    document.addEventListener('touchstart', onFirstInteraction, { once: true });
     </script>
 </body>
 </html>
