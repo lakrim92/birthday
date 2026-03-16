@@ -449,25 +449,32 @@
         music.volume = 0.4;
         music.play().then(() => {
             playing = true;
-            btn.textContent = '🎵';
+            btn.textContent = '🔇';
         }).catch(() => {});
     }
 
     function toggleMusic() {
-        if (playing) { music.pause(); btn.textContent = '🔇'; }
-        else { music.play(); btn.textContent = '🎵'; }
+        if (playing) {
+            music.pause();
+            btn.textContent = '🎵';
+        } else {
+            music.play();
+            btn.textContent = '🔇';
+        }
         playing = !playing;
     }
 
-    // Tentative d'autoplay au chargement
-    window.addEventListener('DOMContentLoaded', startMusic);
+    // Autoplay direct (le script s'exécute après le DOM)
+    startMusic();
 
     // Fallback si l'autoplay est bloqué par le navigateur : démarre au premier geste
     function onFirstInteraction() {
         if (!playing) startMusic();
+        document.removeEventListener('click',      onFirstInteraction);
+        document.removeEventListener('touchstart', onFirstInteraction);
     }
-    document.addEventListener('click',      onFirstInteraction, { once: true });
-    document.addEventListener('touchstart', onFirstInteraction, { once: true });
+    document.addEventListener('click',      onFirstInteraction);
+    document.addEventListener('touchstart', onFirstInteraction);
     </script>
 </body>
 </html>
